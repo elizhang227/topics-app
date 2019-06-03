@@ -1,0 +1,52 @@
+<form action="/topics" method="POST">
+<section class="section">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Topic</td>
+                <td>Ranking</td>
+            </tr>
+        </thead>
+        ${topicList.map(top =>
+                `<tr>
+                    <td>${top.topic}</td>
+                    <td>
+                        <select id="dropdown">
+                            <option>${top.ranking}</option>
+                            <option>0</option>
+                            <option name="1" value="1">1</option>
+                            <option name="2" value="2">2</option>
+                            <option name="3" value="3">3</option>
+                            <option name="4" value="4">4</option>
+                            <option name="5" value="5">5</option>
+                        </select>
+                    </td>
+                </tr>`
+            ).join('')}
+    </table>
+</section>
+
+<section class="section">
+<p>Update a Topic</p>
+<!-- <form action="/topics" method="POST"> -->
+        <label>Topic Name:
+            <input type="text" name="name">
+        </label>
+        <label>Ranking:
+            <input type="text" name="ranking">
+        </label>
+    <div class="button">
+        <button type="submit">Press me hard</button>
+    </div>
+<!-- </form> -->
+</section>
+</form>
+
+<!-- <script type="text/javascript">
+    function testingCode() {
+        const test = document.getElementById('dropdown');
+        test.addEventListener('change', ()=>{
+            console.log(test);
+        })
+    }
+</script> -->

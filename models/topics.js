@@ -41,11 +41,6 @@ class Topics {
             return err;
         };
     }
-
-    // static testtest(name, ranking) {
-    //     const checking = document.getElementById('dropdown');
-    //     console.log(checking);
-    // }
 }
 
 module.exports = Topics;

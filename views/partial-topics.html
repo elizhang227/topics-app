@@ -11,7 +11,7 @@
                 `<tr>
                     <td>${top.topic}</td>
                     <td>
-                        <select id="dropdown">
+                        <select name='${top.topic}' id="dropdown">
                             <option>${top.ranking}</option>
                             <option>0</option>
                             <option name="1" value="1">1</option>
@@ -41,12 +41,3 @@
 <!-- </form> -->
 </section>
 </form>
-
-<!-- <script type="text/javascript">
-    function testingCode() {
-        const test = document.getElementById('dropdown');
-        test.addEventListener('change', ()=>{
-            console.log(test);
-        })
-    }
-</script> -->

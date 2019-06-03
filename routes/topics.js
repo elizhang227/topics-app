@@ -16,6 +16,51 @@ router.get('/', async (req, res, next) => {
     });
 })
 
+router.post('/', (req, res) => {
+    console.log(req.body);
+    const { name, ranking } = req.body;
+
+    TopicsModel.refreshTopic(name, ranking)
+    .then(async () => {
+        const allTopics = await TopicsModel.getAllTopics();
+
+        res.status(200).render('template', {
+            locals: {
+                title: 'List of Topics from Class',
+                topicList: allTopics
+            },
+            partials: {
+                content: 'partial-topics'
+            }
+        });
+    })
+    .catch((err) => {
+        res.sendStatus(500).send(err.message);
+    });
+});
+
+// router.post('/', (req, res) => {
+//     const { name, ranking } = req.body;
+
+//     TopicsModel.updateTopic(name, ranking)
+//     .then(async () => {
+//         const allTopics = await TopicsModel.getAllTopics();
+
+//         res.status(200).render('template', {
+//             locals: {
+//                 title: 'List of Topics from Class',
+//                 topicList: allTopics
+//             },
+//             partials: {
+//                 content: 'partial-topics'
+//             }
+//         });
+//     })
+//     .catch((err) => {
+//         res.sendStatus(500).send(err.message);
+//     });
+// });
+
 // router.post('/', (req, res) => {
 //     const { name, ranking } = req.body;
 
@@ -40,29 +85,5 @@ router.get('/', async (req, res, next) => {
 //         res.sendStatus(500).send(err.message);
 //     });
 // });
-
-router.post('/', (req, res) => {
-    const { name, ranking } = req.body;
-
-    TopicsModel.updateTopic(name, ranking)
-    .then(async () => {
-        const allTopics = await TopicsModel.getAllTopics();
-
-        //testtest();
-
-        res.status(200).render('template', {
-            locals: {
-                title: 'List of Topics from Class',
-                topicList: allTopics
-            },
-            partials: {
-                content: 'partial-topics'
-            }
-        });
-    })
-    .catch((err) => {
-        res.sendStatus(500).send(err.message);
-    });
-});
 
 module.exports = router;

@@ -17,26 +17,34 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/', (req, res) => {
-    console.log(req.body);
-    const { name, ranking } = req.body;
+    //console.log(`this is the output for: ${req.body.PostgresQL}`);
+    Object.keys(req.body).forEach(function(key) {
+        //console.log(key, req.body[key])
 
-    TopicsModel.refreshTopic(name, ranking)
-    .then(async () => {
-        const allTopics = await TopicsModel.getAllTopics();
+        const name = key;
+        const ranking = req.body[key]
 
-        res.status(200).render('template', {
-            locals: {
-                title: 'List of Topics from Class',
-                topicList: allTopics
-            },
-            partials: {
-                content: 'partial-topics'
-            }
+        TopicsModel.refreshTopic(name, ranking)
+        .then(async () => {
+            const allTopics = await TopicsModel.getAllTopics();
+    
+            res.status(200).render('template', {
+                locals: {
+                    title: 'List of Topics from Class',
+                    topicList: allTopics
+                },
+                partials: {
+                    content: 'partial-topics'
+                }
+            });
+        })
+        .catch((err) => {
+            res.sendStatus(500).send(err.message);
         });
     })
-    .catch((err) => {
-        res.sendStatus(500).send(err.message);
-    });
+    //const { name, ranking } = req.body;
+
+
 });
 
 // router.post('/', (req, res) => {
